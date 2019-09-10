@@ -1,0 +1,11 @@
+<?xml version="1.0">
+<project name ="ANT Hello World" default="welcome">
+	<target name ="welcome">
+		<echo>This is Hello World Target</echo>
+	</target>
+<target name ="clean"> ... </target>
+<target name ="mkdir"> ... </target>
+<target name="docs" depends="compile"> ... </target>
+<target name="dist" depends="compile"> ... </target>
+<target name="compile" depends="clean, mkdir"> ... </target>
+</project>
