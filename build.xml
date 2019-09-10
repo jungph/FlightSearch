@@ -1,11 +1,51 @@
-<?xml version="1.0">
-<project name ="ANT Hello World" default="welcome">
-	<target name ="welcome">
-		<echo>This is Hello World Target</echo>
+<project name ="Project 1" default="compile" basedir=".">
+	<description>
+		Trying to get this thing to build
+	</description>
+	
+	<!-- global properties for this build file -->
+	<property name="source.dir" location="src"/>
+	<property name="build.dir" location="bin"/>
+	<property name="dist.dir" location="dist" />
+	<property name="doc.dir" location="doc"/>
+	
+	
+	<!-- set up some directories used by this project -->
+	<target name ="init" description="setup project directories">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${doc.dir}" />
+		<mkdir dir="${dist.dir}" />
 	</target>
-<target name ="clean"> ... </target>
-<target name ="mkdir"> ... </target>
-<target name="docs" depends="compile"> ... </target>
-<target name="dist" depends="compile"> ... </target>
-<target name="compile" depends="clean, mkdir"> ... </target>
+	
+	<!-- Compile the java code in src dir into build dir -->
+	<target name="compile" depends="init" description="compile java sources">
+		<javac includeantruntime="false" srcdir="${source.dir}" destdir="${build.dir}" />
+	</target>
+	
+	<!-- Generate javadocs for current project into docs directory -->
+	<target name ="doc" depends="init" description="generate documentation">
+		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}" />
+	</target>
+
+	<!-- Generate jar file for programs -->
+	<!-- We're putting everything in ${build} into here-->
+	<target name ="jar" depends="compile" description="Generate the jar files">
+		<buildnumber />
+		<jar destfile="${dist.dir}/lib/HelloWorld-${version}.${build.number}.jar"
+			 basedir="${build.dir}" />
+	</target>
+	
+	<!-- Delete the build & doc directories and Emacs backup (*~) files -->
+	<target name="clean" description="tidy up the workspace">
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${doc.dir}" />
+		<delete>
+			<fileset defaultexcludes="no" dir="${source.dir}" includes="**/*~" />
+		</delete>
+	</target>
+
+
+	
+
 </project>
