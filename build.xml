@@ -24,19 +24,24 @@
 	
 	<!-- Generate javadocs for current project into docs directory -->
 	<target name ="doc" depends="init" description="generate documentation">
-		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}" />
+		<javadoc packagenames="src" sourcepath="${source.dir}" destdir="${doc.dir}">
+			<fileset dir="${source.dir}">
+				<include name="*.java"/>
+			</fileset>
+
+		</javadoc>
 	</target>
 
 	<!-- Generate jar file for programs -->
 	<!-- We're putting everything in ${build} into here-->
-	<target name ="jar" depends="compile" description="Generate the jar files">
+	<target name ="dist" depends="compile" description="Generate the jar files">
 		<buildnumber />
 		<jar destfile="${dist.dir}/lib/HelloWorld-${version}.${build.number}.jar"
 			 basedir="${build.dir}" />
 	</target>
 	
 	<!-- Delete the build & doc directories and Emacs backup (*~) files -->
-	<target name="clean" description="tidy up the workspace">
+	<target name="clean" description="remove created directories and Emacs backup">
 		<delete dir="${build.dir}" />
 		<delete dir="${dist.dir}" />
 		<delete dir="${doc.dir}" />
