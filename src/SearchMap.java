@@ -9,27 +9,18 @@ import java.util.ArrayList;
 
 public class SearchMap {
 	public char originCity;
-	public ArrayList<Edge> edges;
-	
-	// default constructor only for building/production
-	public SearchMap() {
-		this.edges = new ArrayList<Edge>();
-		this.initFileContents();
-	}
-	
+	public FlightMap flights;
 	
 	// constructor with one argument -- name of input file
-	public SearchMap(String[] args) {	
-		this.edges = new ArrayList<Edge>();
-		this.initFileContents();
+	public SearchMap() {	
+		this.flights = new FlightMap();
 	}
 	
 	
 	// main entry point
 	public static void main(String[] args) {
-		SearchMap test = new SearchMap(args);
-		
-		
+		SearchMap t = new SearchMap();
+		t.readFileContents(args[0]);
 	}
 	
 	/**
@@ -38,8 +29,8 @@ public class SearchMap {
 	 * @throws FNFE if file not found
 	 * @throws IOE if error with IO
 	 */
-	public void initFileContents() {
-		String fileName = "src/input.txt";
+	public void readFileContents(String fileName) {
+		fileName = "src/input.txt";
 		File file = new File(fileName);
 		try {
 			FileReader fr = new FileReader(file);
@@ -52,8 +43,6 @@ public class SearchMap {
 					if (line == null) break;
 					else {
 						setEdges(line.trim());
-						// then first char location is the next city
-						
 					}	
 				}
 			}
@@ -68,7 +57,7 @@ public class SearchMap {
 		
 	}
 	
-	/** Returns a 'trimmed' string "O D W"
+	/** Receives a 'trimmed' string "O D W"
 	 *  where O is a char representing origin city
 	 *  where D is a char representing destination city
 	 *  where W is an integer representing the weight of this flight
@@ -81,7 +70,7 @@ public class SearchMap {
 		line = line.substring(1).trim();
 		int weight = Integer.parseInt(line);
 		Edge e = new Edge(startCity, destCity, weight);
-		edges.add(e);
+		flights.addEdge(e);
 	}
 	
 	
@@ -91,6 +80,9 @@ public class SearchMap {
 	 */
 	public char getOriginCity() {
 		return originCity;
+	}
+	public boolean pathExists(char orig, char dest) {
+		return false;
 	}
 
 	

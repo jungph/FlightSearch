@@ -3,7 +3,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestSearchMap {
-	
+	@Test
+	public void getOriginTest() {
+		SearchMap s = new SearchMap();
+		assertEquals('P', s.getOriginCity());
+	}
 	
 	/**
 	 * Test is now obsolete. Just used to test basic functions
@@ -15,17 +19,14 @@ public class TestSearchMap {
 	}
 	 */
 	
-	@Test
-	public void getOriginCity() {
-		SearchMap s = new SearchMap();
-		assertEquals('P', s.getOriginCity());
-	}
+	/**
+	 * 
+	 */
 	
-	@Test
-	public void getEdgeTest1() {
-		SearchMap s = new SearchMap();
-		assertEquals('P', s.edges.get(0).orig);
-	}
+	
+	/** These edge tests obsolete because method was moved to FlightMap class
+	 * 
+	 * 
 	@Test
 	public void getEdgeTest2() {
 		SearchMap s = new SearchMap();
@@ -51,7 +52,10 @@ public class TestSearchMap {
 		SearchMap s = new SearchMap();
 		assertEquals(250, s.edges.get(1).weight);
 	}
+	 * 
+	 */
 	
+
 }
 
 
