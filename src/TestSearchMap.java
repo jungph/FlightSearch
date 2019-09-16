@@ -20,7 +20,7 @@ public class TestSearchMap {
 		}finally {
 			writer.close();
 		}
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
 		assertEquals('P', s.originCity);
 		File file = new File("input_files/Testinput.txt");
@@ -41,6 +41,49 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap("input_files/Testinput.txt");
 		s.writeSearchResults("output_files/Testoutput.txt");
+		
+	}
+	@Test
+	public void writeSearchResultsTest2() {
+		//test for very long path
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer.println("Z");
+			writer.println("A B 200");
+			writer.println("Z A 200");
+			writer.println("B C 200");
+			writer.println("C D 200");
+			writer.println("D E 200");
+			writer.println("F G 200");
+			writer.println("E F 200");
+			writer.println("G H 200");
+			writer.println("I J 200");
+			writer.println("H I 200");
+			writer.println("J K 200");
+			writer.println("L M 200");
+			writer.println("K L 200");
+			writer.println("M N 200");
+			writer.println("N O 200");
+			writer.println("P Q 200");
+			writer.println("Q R 200");
+			writer.println("O P 200");
+			writer.println("S T 200");
+			writer.println("R S 200");
+			writer.println("T U 200");
+			writer.println("W X 200");
+			writer.println("U V 200");
+			writer.println("V W 200");
+			writer.println("X Y 200");
+			
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		SearchMap s = new SearchMap();
+		s.readFileContents("input_files/Testinput.txt");
+		s.writeSearchResults("output_files/Testoutput5.txt");
 		
 	}
 	@Test
@@ -98,7 +141,8 @@ public class TestSearchMap {
 		}finally {
 			writer.close();
 		}
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		SearchMap s = new SearchMap();
+		s.readFileContents("input_files/Testinput.txt");
 		assertEquals('P', s.originCity);
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
@@ -117,7 +161,8 @@ public class TestSearchMap {
 		}finally {
 			writer.close();
 		}
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		SearchMap s = new SearchMap();
+		s.readFileContents("input_files/Testinput.txt");
 		assertEquals('E', s.originCity);
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
@@ -134,7 +179,8 @@ public class TestSearchMap {
 		}finally {
 			writer.close();
 		}
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		SearchMap s = new SearchMap();
+		s.readFileContents("input_files/Testinput.txt");
 		assertEquals('Z', s.originCity);
 		File file = new File("input_files/Testinput.txt");
 		file.delete();

@@ -27,7 +27,6 @@ public class SearchMap {
 	}
 	public SearchMap(String fileName) {
 		this.flights = new FlightMap();
-		this.readFileContents(fileName);
 		this.cities = new ArrayList<Character>();
 	}
 	/**
@@ -65,9 +64,10 @@ public class SearchMap {
 			String arg1 = "Destination";
 			String arg2 = "Flight Route from " + originCity;
 			String arg3 = "Total Cost";
+			int lengthOfLongestPath = cities.size() * 3 + 10;
 			
 			writer = new PrintWriter(fileName, "UTF-8");
-			writer.println(String.format("%-20s %-30s %-10s", arg1, arg2, arg3));
+			writer.println(String.format("%-20s %-"+lengthOfLongestPath +"s %s", arg1, arg2, arg3));
 			for (int i = 0; i < cities.size(); i++) {
 				if (flights.pathExists(originCity, cities.get(i))) {
 					arg1 = Character.toString(cities.get(i));
@@ -77,7 +77,7 @@ public class SearchMap {
 					}
 					arg2 += Character.toString(flights.actualPath.get(flights.actualPath.size() - 1));
 					arg3 = "$" + Integer.toString(flights.actualCost);
-					writer.println(String.format("%-20s %-30s %-10s", arg1, arg2, arg3));
+					writer.println(String.format("%-20s %-" +lengthOfLongestPath + "s %s", arg1, arg2, arg3));
 				}
 			}
 		} catch (IOException ioe) {
