@@ -19,7 +19,6 @@ public class FlightMap {
 	public boolean pathExistsHelper(char orig, char dest, int totalWeight, ArrayList<Character> path, ArrayList<Edge> remEdges) {
 		for (int i =0; i < remEdges.size(); i++) {
 			if (remEdges.get(i).orig == orig) {
-				path.add(orig);
 				if (remEdges.get(i).dest == dest) {
 					path.add(dest);
 					totalWeight += remEdges.get(i).weight;
@@ -28,11 +27,13 @@ public class FlightMap {
 					actualCost = totalWeight;
 					actualPath = path;
 					return true;
-				} else {
+				} else if (!path.contains(remEdges.get(i).dest))
+				{
 					Edge currentEdge = remEdges.get(i);
 					int currentWeight = currentEdge.weight;
 					totalWeight += currentWeight;
 					char nextOrig = currentEdge.dest;
+					path.add(nextOrig);
 					remEdges.remove(i);
 					if (pathExistsHelper(nextOrig, dest, totalWeight, path,remEdges)) {
 						return true;
@@ -49,7 +50,8 @@ public class FlightMap {
 	public boolean pathExists(char orig, char dest) {
 		actualCost = 0;
 		actualPath = new ArrayList<Character>();
-		ArrayList<Edge> remainingEdges = edges;
+		actualPath.add(orig);
+		ArrayList<Edge> remainingEdges = new ArrayList<Edge>(edges);
 		return pathExistsHelper(orig, dest, actualCost, actualPath, remainingEdges);
 	}
 }
