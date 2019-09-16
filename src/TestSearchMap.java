@@ -8,6 +8,60 @@ import java.io.PrintWriter;
 
 public class TestSearchMap {
 	@Test
+	public void defaultConstructorTest1() {
+		SearchMap s = new SearchMap();
+		// if cities size is not 0 (null), then s not created or it is not initialized correctly;
+		assertTrue(s.cities.size() == 0);
+	}
+	@Test
+	public void defaultConstructorTest2() {
+		SearchMap s = new SearchMap();
+		// if flights is not null, then flights has been initialized correctly
+		assertTrue(s.flights != null);
+	}
+	@Test
+	public void parmConstructorTest1() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer.println("P");
+			writer.println("P W 200");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		
+		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		// if flights is not null, then flights has been initialized correctly
+		// reading and writing functions (called by this constructor) are tested separately
+		assertTrue(s.flights != null);
+		File file = new File("input_files/Testinput.txt");
+		file.delete();
+	}
+	@Test
+	public void parmConstructorTest2() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer.println("P");
+			writer.println("P W 200");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		
+		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		// Based on the test input file made, cities size should be 2
+		assertTrue(s.cities.size() == 2);
+		File file = new File("input_files/Testinput.txt");
+		file.delete();
+	}
+	
+	
+	
+	@Test
 	public void readFileContentsTest1() {
 		
 		PrintWriter writer = null;
@@ -83,7 +137,7 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
-		s.writeSearchResults("output_files/Testoutput5.txt");
+		assertTrue(s.flights.pathExists('Z', 'A'));
 		
 	}
 	@Test

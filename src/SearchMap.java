@@ -10,30 +10,53 @@ import java.util.ArrayList;
 
 public class SearchMap {
 	
-	// main entry point
+	// Entry point for program - Main
 	public static void main(String[] args) {
 		SearchMap t = new SearchMap();
 		t.readFileContents("input_files/Testinput.txt");
 		t.writeSearchResults("output_files/Testoutput.txt");
 	}
-	
+	// Used to keep track of the origin city 
 	public char originCity;
+	// Object FlightMap is used to find search paths from origin city to each destination
 	public FlightMap flights;
+	// A list of chars that will be used to store each unique city found in input file
 	public ArrayList<Character> cities;
-	// constructor with one argument -- name of input file
+	/**
+	 * Default constructor
+	 * initializes local variables flights and cities
+	 * @param : none
+	 * @return: none
+	 * @post : flights == null;
+	 * @post : cities == null;
+	 */
 	public SearchMap() {	
 		this.flights = new FlightMap();
 		this.cities = new ArrayList<Character>();
 	}
+	/**
+	 * Parameterized constructor
+	 * initializes local variables flights and cities and calls readFileContents using
+	 * the file name given in argument.
+	 * @param : fileName is the name (sometimes this includes relative file path location)
+	 * 			of the text file containing flight information
+	 * @return: none
+	 * @post : flights == null;
+	 * @post : cities == null;
+	 */
 	public SearchMap(String fileName) {
 		this.flights = new FlightMap();
 		this.cities = new ArrayList<Character>();
+		this.readFileContents(fileName);
 	}
 	/**
-	 * Reads the contents of input file and sets the class variables
+	 * By reading the contents of the file, this function will store the origin city (first char of the input text file)
+	 * 	and call setEdges function each time an edge is found in the input text file
+	 * @param: fileName will have the fileName of the text file that has the cities information
+	 * 			also expects relative file path if not already given
 	 * @return nothing
-	 * @throws FNFE if file not found
-	 * @throws IOE if error with IO
+	 * @throws FileNotFoundException if file cannot be found
+	 * @throws IOException if there is an IO error (standard exception with file IO)
 	 */
 	public void readFileContents(String fileName) {
 		File file = new File(fileName);
@@ -58,6 +81,15 @@ public class SearchMap {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * writeSearchResults uses the object's FlightMap object to find paths from origin city to every other city
+	 *  It then writes these results, and formats it, and stores it in an output text file
+	 * @param: fileName is the file name for output text file (this includes relative path if user
+	 * 			wants to store somewhere else.
+	 * @post: Output text file will have a listing of Destination, Path from Origin City, and Cost for each path
+	 * @return nothing
+	 * @throws IOException if there is an IO error (standard exception with file IO)
+	 */
 	public void writeSearchResults(String fileName) {
 		PrintWriter writer = null;
 		try {
@@ -88,11 +120,11 @@ public class SearchMap {
 		
 	}
 	
-	/** Receives a 'trimmed' string "O D W"
-	 *  where O is a char representing origin city
-	 *  where D is a char representing destination city
-	 *  where W is an integer representing the weight of this flight
-	 * 
+	/**
+	 * setEdges will make Edge objects and store each edge to the local flights object
+	 * @param: a String line where each line consists of a new line read from input text file
+	 * @post: an Edge object is created and added to flights object's list by calling its method addEdge
+	 * @return nothing
 	 */
 	public void setEdges(String line) {
 		char startCity = line.charAt(0);
@@ -107,15 +139,15 @@ public class SearchMap {
 	}
 	
 	
-	/** Returns the origin city
-	 * 
-	 * @return char representing origin city which is the first 'city' of input.txt
+	/**
+	 * Returns the origin city
+	 * @param: nothing
+	 * @post: nothing
+	 * @return: the local variable originCity
+	 * @throws IOException if there is an IO error (standard exception with file IO)
 	 */
 	public char getOriginCity() {
 		return this.originCity;
-	}
-	public boolean pathExists(char orig, char dest) {
-		return false;
 	}
 
 	
