@@ -2,7 +2,7 @@ package src;
 
 import java.util.ArrayList;
 
-public class FlightMap {
+class FlightMap {
 	public int actualCost;
 	public ArrayList<Character> actualPath;
 	public ArrayList<Edge> edges;

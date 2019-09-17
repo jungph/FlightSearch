@@ -4,7 +4,23 @@ import static org.junit.Assert.*;
 
 
 public class TestFlightMap {
-
+	@Test
+	public void defaultConstructor1() {
+		FlightMap f = new FlightMap();
+		assertTrue(f.actualPath != null);
+	}
+	@Test
+	public void defaultConstructor2() {
+		FlightMap f = new FlightMap();
+		assertTrue(f.edges != null);
+	}
+	@Test
+	public void getActualCostTest1() {
+		FlightMap f = new FlightMap();
+		f.actualCost = 10;
+		assertEquals(f.actualCost, 10);
+	}
+	
 	@Test
 	public void testAddEdges() {
 		FlightMap f = new FlightMap();
@@ -104,7 +120,7 @@ public class TestFlightMap {
 		e = new Edge('Y', 'R', 600);
 		f.addEdge(e);
 		f.pathExists('P', 'Y');
-		assertEquals(1600 , f.getActualCost());
+		assertEquals(700 , f.getActualCost());
 	}
 	@Test public void pathCount2() {
 		FlightMap f = new FlightMap();
@@ -129,7 +145,7 @@ public class TestFlightMap {
 		e = new Edge('Y', 'R', 600);
 		f.addEdge(e);
 		f.pathExists('P', 'R');
-		assertEquals(2200 , f.getActualCost());
+		assertEquals(1300 , f.getActualCost());
 	}
 	@Test public void pathCount3() {
 		FlightMap f = new FlightMap();
