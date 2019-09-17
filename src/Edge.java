@@ -1,7 +1,7 @@
 package src;
 
 
-public class Edge {
+class Edge {
 	public char orig;
 	public char dest;
 	public int weight;
