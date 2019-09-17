@@ -2,6 +2,8 @@ package src;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 
 public class TestFlightMap {
 	@Test
@@ -71,6 +73,33 @@ public class TestFlightMap {
 		
 		assertTrue(f.pathExists('W', 'F'));
 	}
+	@Test
+	public void pathExistsHelperTest1() {
+		FlightMap f = new FlightMap();
+		Edge e = new Edge('P', 'W', 200);
+		f.addEdge(e);
+		e = new Edge('W', 'Q', 150);
+		f.addEdge(e);
+		f.actualCost = 0;
+		f.actualPath = new ArrayList<Character>();
+		f.actualPath.add('P');
+		ArrayList<Edge> remainingEdges = new ArrayList<Edge>(f.edges);
+		assertTrue(f.pathExistsHelper('P', 'W', f.actualCost, f.actualPath, remainingEdges));
+	}
+	@Test
+	public void pathExistsHelperTest2() {
+		FlightMap f = new FlightMap();
+		Edge e = new Edge('P', 'W', 200);
+		f.addEdge(e);
+		e = new Edge('W', 'Q', 150);
+		f.addEdge(e);
+		f.actualCost = 0;
+		f.actualPath = new ArrayList<Character>();
+		f.actualPath.add('P');
+		ArrayList<Edge> remainingEdges = new ArrayList<Edge>(f.edges);
+		assertTrue(!f.pathExistsHelper('Q', 'P', f.actualCost, f.actualPath, remainingEdges));
+	}
+	
 	@Test
 	public void pathExists4() {
 		FlightMap f = new FlightMap();
