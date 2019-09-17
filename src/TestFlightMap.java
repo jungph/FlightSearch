@@ -39,8 +39,7 @@ public class TestFlightMap {
 		e = new Edge('W', 'F', 25);
 		f.addEdge(e);
 		e = new Edge('Z', 'R', 25);
-		f.addEdge(e);
-		
+		f.addEdge(e);	
 		assertTrue(f.pathExists('P', 'R'));
 	}
 	

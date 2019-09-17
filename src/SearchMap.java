@@ -117,7 +117,6 @@ public class SearchMap {
 		} finally {
 			writer.close();
 		}
-		
 	}
 	
 	/**
