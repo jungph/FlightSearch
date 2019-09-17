@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 
 public class TestFlightMap {
+
 	@Test
 	public void testAddEdges() {
 		FlightMap f = new FlightMap();
