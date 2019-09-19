@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Philip Jung
  * @version 1.0
  */
-class FlightMap {
+public class FlightMap {
 	private int actualCost;
 	private ArrayList<Character> actualPath;
 	private ArrayList<Edge> edges;
