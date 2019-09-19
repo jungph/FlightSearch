@@ -2,14 +2,23 @@ package src;
 
 
 class Edge {
-	public char orig;
-	public char dest;
-	public int weight;
+	private char orig;
+	private char dest;
+	private int weight;
 	
 	Edge(char o, char d, int w) {
 		orig = o;
 		dest = d;
 		weight = w;
+	}
+	public char getOrig() {
+		return orig;
+	}
+	public char getDest() {
+		return dest;
+	}
+	public int getWeight() {
+		return weight;
 	}
 	
 }

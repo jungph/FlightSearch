@@ -5,17 +5,22 @@ import static org.junit.Assert.*;
 public class TestEdge {
 	@Test
 	public void testConstructor1() {
-		Edge e = new Edge('P', 'W', 200);
-		assertEquals(e.orig, 'P');
+		Edge e = new Edge('P','W', 200);
+		assertTrue(e != null);
 	}
 	@Test
-	public void testConstructor2() {
+	public void testGetOrig1() {
 		Edge e = new Edge('P', 'W', 200);
-		assertEquals(e.dest, 'W');
+		assertEquals(e.getOrig(), 'P');
 	}
 	@Test
-	public void testConstructor3() {
+	public void testGetDest1() {
 		Edge e = new Edge('P', 'W', 200);
-		assertEquals(e.weight, 200);
+		assertEquals(e.getDest(), 'W');
+	}
+	@Test
+	public void testGetWeight() {
+		Edge e = new Edge('P', 'W', 200);
+		assertEquals(e.getWeight(), 200);
 	}
 }

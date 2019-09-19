@@ -1,5 +1,4 @@
 package src;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,28 +6,54 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+/**
+ * This class reads a list of flights (called Edges) from an input text file and writes
+ * a list of paths and costs to an output file
+ * @author Philip Jung
+ * @version 1.0
+ */
 
 public class SearchMap {
 	
 	// Entry point for program - Main
+	/**
+	 * The client class for running SearchMap.
+	 * @param args Requires two String class arguments. args[0] will be the name (include file path) 
+	 * of the input file that has a list of cities and costs of flights between adjacent cities.
+	 * args[1] will be the name (include file path) of the output file to store paths
+	 */
 	public static void main(String[] args) {
 		SearchMap t = new SearchMap();
 		t.readFileContents("input_files/Testinput.txt");
 		t.writeSearchResults("output_files/Testoutput.txt");
 	}
 	// Used to keep track of the origin city 
-	public char originCity;
+	private char originCity;
 	// Object FlightMap is used to find search paths from origin city to each destination
-	public FlightMap flights;
+	private FlightMap flights;
 	// A list of chars that will be used to store each unique city found in input file
-	public ArrayList<Character> cities;
+	private ArrayList<Character> cities;
 	/**
 	 * Default constructor
 	 * initializes local variables flights and cities
-	 * @param : none
-	 * @return: none
-	 * @post : flights == null;
-	 * @post : cities == null;
+	 */
+	
+	/**
+	 * Used by JUnit tests to get a list of cities in current SearchMap class
+	 * @return cities, ArrayList of Characters representing the cities in SearchMap
+	 */
+	public ArrayList<Character> getCities() {
+		return cities;
+	}
+	/**
+	 * Used by JUnit tests to get existing Flight class in current SearchMap class
+	 * @return flights Flight class that is initialized in current SearchMap
+	 */
+	public FlightMap getFlights() {
+		return flights;
+	}
+	/**
+	 * Default constructor for SearchMap(). Allocates a memory address to reference for local variables FlightMap and ArrayList of Character wrapper class
 	 */
 	public SearchMap() {	
 		this.flights = new FlightMap();
@@ -38,11 +63,8 @@ public class SearchMap {
 	 * Parameterized constructor
 	 * initializes local variables flights and cities and calls readFileContents using
 	 * the file name given in argument.
-	 * @param : fileName is the name (sometimes this includes relative file path location)
+	 * @param  fileName is the name (sometimes this includes relative file path location)
 	 * 			of the text file containing flight information
-	 * @return: none
-	 * @post : flights == null;
-	 * @post : cities == null;
 	 */
 	public SearchMap(String fileName) {
 		this.flights = new FlightMap();
@@ -52,11 +74,8 @@ public class SearchMap {
 	/**
 	 * By reading the contents of the file, this function will store the origin city (first char of the input text file)
 	 * 	and call setEdges function each time an edge is found in the input text file
-	 * @param: fileName will have the fileName of the text file that has the cities information
+	 * @param fileName will have the fileName of the text file that has the cities information
 	 * 			also expects relative file path if not already given
-	 * @return nothing
-	 * @throws FileNotFoundException if file cannot be found
-	 * @throws IOException if there is an IO error (standard exception with file IO)
 	 */
 	public void readFileContents(String fileName) {
 		File file = new File(fileName);
@@ -72,6 +91,7 @@ public class SearchMap {
 					else {
 						setEdges(line.trim());
 					}	
+					
 				}
 			}
 			br.close();
@@ -84,11 +104,8 @@ public class SearchMap {
 	/**
 	 * writeSearchResults uses the object's FlightMap object to find paths from origin city to every other city
 	 *  It then writes these results, and formats it, and stores it in an output text file
-	 * @param: fileName is the file name for output text file (this includes relative path if user
+	 * @param fileName is the file name for output text file (this includes relative path if user
 	 * 			wants to store somewhere else.
-	 * @post: Output text file will have a listing of Destination, Path from Origin City, and Cost for each path
-	 * @return nothing
-	 * @throws IOException if there is an IO error (standard exception with file IO)
 	 */
 	public void writeSearchResults(String fileName) {
 		PrintWriter writer = null;
@@ -104,11 +121,11 @@ public class SearchMap {
 				if (flights.pathExists(originCity, cities.get(i))) {
 					arg1 = Character.toString(cities.get(i));
 					arg2 = "";
-					for (int j = 0; j < flights.actualPath.size() - 1; j++) {
-						arg2 += Character.toString(flights.actualPath.get(j)) + ", ";
+					for (int j = 0; j < flights.getActualPath().size() - 1; j++) {
+						arg2 += Character.toString(flights.getActualPath().get(j)) + ", ";
 					}
-					arg2 += Character.toString(flights.actualPath.get(flights.actualPath.size() - 1));
-					arg3 = "$" + Integer.toString(flights.actualCost);
+					arg2 += Character.toString(flights.getActualPath().get(flights.getActualPath().size() - 1));
+					arg3 = "$" + Integer.toString(flights.getActualCost());
 					writer.println(String.format("%-20s %-" +lengthOfLongestPath + "s %s", arg1, arg2, arg3));
 				}
 			}
@@ -121,9 +138,7 @@ public class SearchMap {
 	
 	/**
 	 * setEdges will make Edge objects and store each edge to the local flights object
-	 * @param: a String line where each line consists of a new line read from input text file
-	 * @post: an Edge object is created and added to flights object's list by calling its method addEdge
-	 * @return nothing
+	 * @param line where each line consists of a new line read from input text file
 	 */
 	public void setEdges(String line) {
 		char startCity = line.charAt(0);
@@ -140,10 +155,7 @@ public class SearchMap {
 	
 	/**
 	 * Returns the origin city
-	 * @param: nothing
-	 * @post: nothing
-	 * @return: the local variable originCity
-	 * @throws IOException if there is an IO error (standard exception with file IO)
+	 * @return the local variable originCity
 	 */
 	public char getOriginCity() {
 		return this.originCity;

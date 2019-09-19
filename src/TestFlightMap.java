@@ -9,18 +9,17 @@ public class TestFlightMap {
 	@Test
 	public void defaultConstructor1() {
 		FlightMap f = new FlightMap();
-		assertTrue(f.actualPath != null);
+		assertTrue(f.getActualPath() != null);
 	}
 	@Test
 	public void defaultConstructor2() {
 		FlightMap f = new FlightMap();
-		assertTrue(f.edges != null);
+		assertTrue(f.getEdges() != null);
 	}
 	@Test
 	public void getActualCostTest1() {
 		FlightMap f = new FlightMap();
-		f.actualCost = 10;
-		assertEquals(f.actualCost, 10);
+		assertEquals(f.getActualCost(), 0);
 	}
 	
 	@Test
@@ -28,7 +27,7 @@ public class TestFlightMap {
 		FlightMap f = new FlightMap();
 		Edge e = new Edge('P', 'W', 200);
 		f.addEdge(e);
-		assertTrue(f.edges.size() > 0);
+		assertTrue(f.getEdges().size() > 0);
 	}
 
 	@Test
@@ -73,6 +72,9 @@ public class TestFlightMap {
 		
 		assertTrue(f.pathExists('W', 'F'));
 	}
+	/* pathExistsHelperTest removed because it should be private
+	 * Will be testing this function through pathExistsHelper which is the public
+	 * method that calls this Test
 	@Test
 	public void pathExistsHelperTest1() {
 		FlightMap f = new FlightMap();
@@ -80,12 +82,12 @@ public class TestFlightMap {
 		f.addEdge(e);
 		e = new Edge('W', 'Q', 150);
 		f.addEdge(e);
-		f.actualCost = 0;
-		f.actualPath = new ArrayList<Character>();
-		f.actualPath.add('P');
-		ArrayList<Edge> remainingEdges = new ArrayList<Edge>(f.edges);
 		assertTrue(f.pathExistsHelper('P', 'W', f.actualCost, f.actualPath, remainingEdges));
 	}
+	/* pathExistsHelperTest removed because it should be private
+	 * Will be testing this function through pathExistsHelper which is the public
+	 * method that calls this Test
+
 	@Test
 	public void pathExistsHelperTest2() {
 		FlightMap f = new FlightMap();
@@ -99,7 +101,7 @@ public class TestFlightMap {
 		ArrayList<Edge> remainingEdges = new ArrayList<Edge>(f.edges);
 		assertTrue(!f.pathExistsHelper('Q', 'P', f.actualCost, f.actualPath, remainingEdges));
 	}
-	
+	*/
 	@Test
 	public void pathExists4() {
 		FlightMap f = new FlightMap();

@@ -11,13 +11,13 @@ public class TestSearchMap {
 	public void defaultConstructorTest1() {
 		SearchMap s = new SearchMap();
 		// if cities size is not 0 (null), then s not created or it is not initialized correctly;
-		assertTrue(s.cities.size() == 0);
+		assertTrue(s.getCities().size() == 0);
 	}
 	@Test
 	public void defaultConstructorTest2() {
 		SearchMap s = new SearchMap();
 		// if flights is not null, then flights has been initialized correctly
-		assertTrue(s.flights != null);
+		assertTrue(s.getFlights()!= null);
 	}
 	@Test
 	public void parmConstructorTest1() {
@@ -35,7 +35,7 @@ public class TestSearchMap {
 		SearchMap s = new SearchMap("input_files/Testinput.txt");
 		// if flights is not null, then flights has been initialized correctly
 		// reading and writing functions (called by this constructor) are tested separately
-		assertTrue(s.flights != null);
+		assertTrue(s.getFlights() != null);
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
 	}
@@ -54,7 +54,7 @@ public class TestSearchMap {
 		
 		SearchMap s = new SearchMap("input_files/Testinput.txt");
 		// Based on the test input file made, cities size should be 2
-		assertTrue(s.cities.size() == 2);
+		assertTrue(s.getCities().size() == 2);
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
 	}
@@ -76,7 +76,7 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
-		assertEquals('P', s.originCity);
+		assertEquals('P', s.getOriginCity());
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
 	}
@@ -137,26 +137,26 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
-		assertTrue(s.flights.pathExists('Z', 'A'));
+		assertTrue(s.getFlights().pathExists('Z', 'A'));
 		
 	}
 	@Test
 	public void setEdgesTest1() {
 		SearchMap s = new SearchMap();
 		s.setEdges("P W 200");
-		assertEquals('P', s.flights.edges.get(0).orig);
+		assertEquals('P', s.getFlights().getEdges().get(0).getOrig());
 	}
 	@Test
 	public void setEdgesTest2() {
 		SearchMap s = new SearchMap();
 		s.setEdges("P W 200");
-		assertEquals('W', s.flights.edges.get(0).dest);
+		assertEquals('W', s.getFlights().getEdges().get(0).getDest());
 	}
 	@Test
 	public void setEdgesTest3() {
 		SearchMap s = new SearchMap();
 		s.setEdges("P W 200");
-		assertEquals(200, s.flights.edges.get(0).weight);
+		assertEquals(200, s.getFlights().getEdges().get(0).getWeight());
 	}
 	
 	@Test
@@ -164,21 +164,21 @@ public class TestSearchMap {
 		SearchMap s = new SearchMap();
 		s.setEdges("P W 200");
 		s.setEdges("W X 275");
-		assertEquals('W', s.flights.edges.get(1).orig);
+		assertEquals('W', s.getFlights().getEdges().get(1).getOrig());
 	}
 	@Test
 	public void setEdgesTest5() {
 		SearchMap s = new SearchMap();
 		s.setEdges("P W 200");
 		s.setEdges("W X 275");
-		assertEquals('X', s.flights.edges.get(1).dest);
+		assertEquals('X', s.getFlights().getEdges().get(1).getDest());
 	}
 	@Test
 	public void setEdgesTest6() {
 		SearchMap s = new SearchMap();
 		s.setEdges("P W 200");
 		s.setEdges("W X 275");
-		assertEquals(275, s.flights.edges.get(1).weight);
+		assertEquals(275, s.getFlights().getEdges().get(1).getWeight());
 	}
 	
 	
@@ -197,7 +197,7 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
-		assertEquals('P', s.originCity);
+		assertEquals('P', s.getOriginCity());
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
 	}
@@ -217,7 +217,7 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
-		assertEquals('E', s.originCity);
+		assertEquals('E', s.getOriginCity());
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
 	}
@@ -235,7 +235,7 @@ public class TestSearchMap {
 		}
 		SearchMap s = new SearchMap();
 		s.readFileContents("input_files/Testinput.txt");
-		assertEquals('Z', s.originCity);
+		assertEquals('Z', s.getOriginCity());
 		File file = new File("input_files/Testinput.txt");
 		file.delete();
 	}
