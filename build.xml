@@ -1,6 +1,6 @@
 <project name ="Project 1" default="compile" basedir=".">
 	<description>
-		Trying to get this thing to build
+		Build files for SearchMap class (Main), its implementation (FlightMap), and its node structure Edge
 	</description>
 	
 	<!-- global properties for this build file -->
@@ -8,6 +8,7 @@
 	<property name="build.dir" location="bin"/>
 	<property name="dist.dir" location="dist" />
 	<property name="doc.dir" location="doc"/>
+	<property name="lib.dir" location="lib" />
 	
 	<path id="classpath.test">
     	<pathelement location="lib/ant-junit4.jar"/>
@@ -30,7 +31,7 @@
 	</target>
 	
 	<!-- Generate javadocs for current project into docs directory -->
-	<target name ="doc" depends="init" description="generate documentation">
+	<target name ="doc" depends="compile" description="generate documentation">
 		<javadoc packagenames="src" sourcepath="${source.dir}" destdir="${doc.dir}">
 			<fileset dir="${source.dir}">
 				<include name="*.java"/>
@@ -41,18 +42,32 @@
 	</target>
 
 	<!-- Generate jar file for programs -->
-	<!-- We're putting everything in ${build} into here
-			<manifest>
-			 	<attribute name="Main-Class" value="HelloWorld" />
-			 </manifest>
-	-->
 	<target name ="dist" depends="compile" description="Generate the jar files">
-		<jar destfile="${dist.dir}/HelloWorld.jar"
-			 basedir="${build.dir}" >
-			 <manifest>
-    			<attribute name="Main-Class" value="src.HelloWorld"/>
+		<jar destfile="${dist.dir}/SearchMap.jar">
+			<manifest>
+				<attribute name="Main-Class" value="src.SearchMap" />
 			</manifest>
+			 <fileset dir ="${build.dir}">
+			 	<include name="**/*.class"/>
+			 </fileset>
 		</jar>
+	</target>
+
+	<!-- Run tests for Searchmap using JUnit -->
+	<target name="test" depends="compile" description=" Run the JUnit tests">
+		<junit printsummary="yes" haltonfailure="no">
+			<!-- Project classpath -->
+		<classpath refid="${lib.dir}/*.jar" />
+
+		<!-- test classes -->
+		<classpath location="${build.dir}" />
+
+		<test name="src.TestEdge.class" haltonfailure="no" todir=".">
+		<formatter type="plain" />
+		<formatter type="xml" />
+	</test>
+
+		</junit>
 	</target>
 	
 	<!-- Delete the build & doc directories and Emacs backup (*~) files -->
