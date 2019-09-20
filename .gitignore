@@ -26,3 +26,8 @@ hs_err_pid*
 /bin/
 /input_files/
 /output_files/
+
+# Eclipse filepath and etc. files
+.DS_Store
+.classpath
+.project

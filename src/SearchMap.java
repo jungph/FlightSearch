@@ -23,9 +23,13 @@ public class SearchMap {
 	 * args[1] will be the name (include file path) of the output file to store paths
 	 */
 	public static void main(String[] args) {
-		SearchMap t = new SearchMap();
-		t.readFileContents("input_files/Testinput.txt");
-		t.writeSearchResults("output_files/Testoutput.txt");
+		SearchMap t = new SearchMap(args[0]);
+		
+		// If SearchMap is constructed with a String argument
+		// then it does not need to call readFileContents(String)
+		// t.readFileContents(args[0]);
+		
+		t.writeSearchResults(args[1]);
 	}
 	// Used to keep track of the origin city 
 	private char originCity;
