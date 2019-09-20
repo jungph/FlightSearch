@@ -23,7 +23,7 @@ public class TestSearchMap {
 	public void parmConstructorTest1() {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("P");
 			writer.println("P W 200");
 		} catch (IOException ioe) {
@@ -32,18 +32,18 @@ public class TestSearchMap {
 			writer.close();
 		}
 		
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		SearchMap s = new SearchMap("Testinput.txt");
 		// if flights is not null, then flights has been initialized correctly
 		// reading and writing functions (called by this constructor) are tested separately
 		assertTrue(s.getFlights() != null);
-		File file = new File("input_files/Testinput.txt");
+		File file = new File("Testinput.txt");
 		file.delete();
 	}
 	@Test
 	public void parmConstructorTest2() {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("P");
 			writer.println("P W 200");
 		} catch (IOException ioe) {
@@ -52,10 +52,10 @@ public class TestSearchMap {
 			writer.close();
 		}
 		
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
+		SearchMap s = new SearchMap("Testinput.txt");
 		// Based on the test input file made, cities size should be 2
 		assertTrue(s.getCities().size() == 2);
-		File file = new File("input_files/Testinput.txt");
+		File file = new File("Testinput.txt");
 		file.delete();
 	}
 	
@@ -66,7 +66,7 @@ public class TestSearchMap {
 		
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("P");
 			writer.println("P W 200");
 		} catch (IOException ioe) {
@@ -74,10 +74,9 @@ public class TestSearchMap {
 		}finally {
 			writer.close();
 		}
-		SearchMap s = new SearchMap();
-		s.readFileContents("input_files/Testinput.txt");
+		SearchMap s = new SearchMap("Testinput.txt");
 		assertEquals('P', s.getOriginCity());
-		File file = new File("input_files/Testinput.txt");
+		File file = new File("Testinput.txt");
 		file.delete();
 	}
 	
@@ -85,7 +84,7 @@ public class TestSearchMap {
 	public void writeSearchResultsTest1() {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("P");
 			writer.println("P W 200");
 		} catch (IOException ioe) {
@@ -93,16 +92,20 @@ public class TestSearchMap {
 		}finally {
 			writer.close();
 		}
-		SearchMap s = new SearchMap("input_files/Testinput.txt");
-		s.writeSearchResults("output_files/Testoutput.txt");
-		
+		SearchMap s = new SearchMap("Testinput.txt");
+		s.writeSearchResults("Testoutput.txt");
+		File file = new File("Testoutput.txt");
+		assertTrue(file != null);
+		file.delete();
+		file = new File("Testinput.txt");
+		file.delete();
 	}
 	@Test
 	public void writeSearchResultsTest2() {
 		//test for very long path
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("Z");
 			writer.println("A B 200");
 			writer.println("Z A 200");
@@ -136,8 +139,10 @@ public class TestSearchMap {
 			writer.close();
 		}
 		SearchMap s = new SearchMap();
-		s.readFileContents("input_files/Testinput.txt");
+		s.readFileContents("Testinput.txt");
 		assertTrue(s.getFlights().pathExists('Z', 'A'));
+		File file = new File("Testinput.txt");
+		file.delete();
 		
 	}
 	@Test
@@ -187,7 +192,7 @@ public class TestSearchMap {
 		
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("P");
 			writer.println("P W 200");
 		} catch (IOException ioe) {
@@ -196,9 +201,9 @@ public class TestSearchMap {
 			writer.close();
 		}
 		SearchMap s = new SearchMap();
-		s.readFileContents("input_files/Testinput.txt");
+		s.readFileContents("Testinput.txt");
 		assertEquals('P', s.getOriginCity());
-		File file = new File("input_files/Testinput.txt");
+		File file = new File("Testinput.txt");
 		file.delete();
 	}
 	@Test
@@ -206,7 +211,7 @@ public class TestSearchMap {
 		
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("E");
 			writer.println("P W 200");
 			writer.println("E X 250");
@@ -216,9 +221,9 @@ public class TestSearchMap {
 			writer.close();
 		}
 		SearchMap s = new SearchMap();
-		s.readFileContents("input_files/Testinput.txt");
+		s.readFileContents("Testinput.txt");
 		assertEquals('E', s.getOriginCity());
-		File file = new File("input_files/Testinput.txt");
+		File file = new File("Testinput.txt");
 		file.delete();
 	}
 	@Test
@@ -226,7 +231,7 @@ public class TestSearchMap {
 		
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("input_files/Testinput.txt", "UTF-8");
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
 			writer.println("Z");
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
@@ -234,9 +239,9 @@ public class TestSearchMap {
 			writer.close();
 		}
 		SearchMap s = new SearchMap();
-		s.readFileContents("input_files/Testinput.txt");
+		s.readFileContents("Testinput.txt");
 		assertEquals('Z', s.getOriginCity());
-		File file = new File("input_files/Testinput.txt");
+		File file = new File("Testinput.txt");
 		file.delete();
 	}
 }
