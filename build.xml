@@ -31,7 +31,7 @@
 	</target>
 	
 	<!-- Generate javadocs for current project into docs directory -->
-	<target name ="doc" depends="compile" description="generate documentation">
+	<target name ="doc" depends="init" description="generate documentation">
 		<javadoc packagenames="src" sourcepath="${source.dir}" destdir="${doc.dir}">
 			<fileset dir="${source.dir}">
 				<include name="*.java"/>
