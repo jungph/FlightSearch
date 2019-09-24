@@ -2,11 +2,53 @@ package src;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class TestSearchMap {
+	@Test
+	public void getCitiesTest1() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
+			writer.println("P");
+			writer.println("P W 200");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		SearchMap s = new SearchMap("Testinput.txt");
+		assertEquals(s.getCities().size(), 2);
+		File file = new File("Testinput.txt");
+		file.delete();
+	}
+	@Test
+	public void getFlightsTest1() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("Testinput.txt", "UTF-8");
+			writer.println("P");
+			writer.println("P W 200");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		SearchMap s = new SearchMap("Testinput.txt");
+		assertTrue(s.getFlights() != null);
+		
+		
+		File file = new File("Testinput.txt");
+		file.delete();
+	}
+	
+	
 	@Test
 	public void defaultConstructorTest1() {
 		SearchMap s = new SearchMap();
@@ -243,6 +285,46 @@ public class TestSearchMap {
 		assertEquals('Z', s.getOriginCity());
 		File file = new File("Testinput.txt");
 		file.delete();
+	}
+	
+	@Test
+	public void mainTest() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("Testinput55.txt", "UTF-8");
+			writer.println("E");
+			writer.println("P W 200");
+			writer.println("E X 250");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally {
+			writer.close();
+		}
+		
+		String[] args = {"Testinput55.txt", "Testoutput55.txt"};
+		SearchMap.main(args);
+		File file = new File("Testoutput55.txt");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			assertEquals("Destination          Flight Route from E    Total Cost", br.readLine());
+			assertEquals("X                    E, X                   $250", br.readLine());
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+			
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} finally {
+			try {
+				br.close();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
+		file.delete();
+		file = new File("Testinput55.txt");
+		file.delete();
+		
 	}
 }
 

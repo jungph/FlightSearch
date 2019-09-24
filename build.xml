@@ -43,7 +43,7 @@
 
 	<!-- Generate jar file for programs -->
 	<target name ="dist" depends="compile" description="Generate the jar files">
-		<jar destfile="${dist.dir}/SearchMap.jar">
+		<jar destfile="${dist.dir}/Project1.jar">
 			<manifest>
 				<attribute name="Main-Class" value="src.SearchMap" />
 			</manifest>

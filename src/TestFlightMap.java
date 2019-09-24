@@ -7,6 +7,31 @@ import java.util.ArrayList;
 
 public class TestFlightMap {
 	@Test
+	public void getEdgesTest1() {
+		FlightMap f = new FlightMap();
+		Edge e = new Edge('P', 'W', 200);
+		f.addEdge(e);
+		Edge p = f.getEdges().get(0);
+		assertEquals(e.getDest(), p.getDest());
+	}
+	@Test
+	public void getEdgesTest2() {
+		FlightMap f = new FlightMap();
+		Edge e = new Edge('P', 'W', 200);
+		f.addEdge(e);
+		Edge p = f.getEdges().get(0);
+		assertEquals(e.getOrig(), p.getOrig());
+	}
+	@Test
+	public void getEdgesTest3() {
+		FlightMap f = new FlightMap();
+		Edge e = new Edge('P', 'W', 200);
+		f.addEdge(e);
+		Edge p = f.getEdges().get(0);
+		assertEquals(e.getWeight(), p.getWeight());
+	}
+	
+	@Test
 	public void defaultConstructor1() {
 		FlightMap f = new FlightMap();
 		assertTrue(f.getActualPath() != null);
